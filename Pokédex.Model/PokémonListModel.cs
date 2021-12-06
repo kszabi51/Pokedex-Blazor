@@ -8,8 +8,18 @@ namespace Pokédex.Model
 {
     public class Result
     {
+        //Name from API
         public string? name { get; set; }
+
+        //Url from API
         public string? url { get; set; }
+
+        //Pokédex number split from the url
+        public int Number => int.Parse(url.Split('/').ElementAt(6));
+
+        //Picture from guthub repo using pokédex number
+        public string? Picture => $"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + Number.ToString() + ".png";
+
     }
 
     public class PokémonList

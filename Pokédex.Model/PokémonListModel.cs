@@ -20,4 +20,12 @@ namespace Pokédex.Model
         public List<Result>? results { get; set; }
     }
 
+    public class PokemonListDataModel
+    {
+        public string? name { get; set; }
+        public string? url { get; set; }
+        public int number { get; set; }
+        public List<Type>? types { get; set; }
+        public string? picture { get; set; }
+    }
 }

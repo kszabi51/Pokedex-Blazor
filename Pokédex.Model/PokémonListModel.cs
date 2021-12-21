@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pokedex.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,8 @@ namespace Pokédex.Model
         //Name from API
         public string? name { get; set; }
 
-        public string? RealName => GetPokemonName();
+        //Pokemon Name transformed to be readable on the UI
+        public string? RealName => PokemonNameService.GetPokemonName(name);
 
         //Url from API
         public string? url { get; set; }
@@ -33,63 +35,6 @@ namespace Pokédex.Model
 
         //Picture from github repo using pokédex number
         public string? Picture => $"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + Number.ToString() + ".png";
-
-        //Map API pokemon names to Correct pokemon names
-        private Dictionary<string, string> CorrectNameMapping = new Dictionary<string, string>()
-        {
-            { "Nidoran-f", "Nidoran♀" },
-            { "Nidoran-m", "Nidoran♂" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Ho-oh", "Ho-Oh" },
-            { "Mime-jr", "Mime Jr." },
-            { "Porygon-z", "Porygon-Z" },
-            { "Type-null", "Type: Null" },
-            { "Tapu-koko", "Tapu Koko" },
-            { "Tapu-lele", "Tapu Lele" },
-            { "Tapu-bulu", "Tapu Bulu" },
-            { "Tapu-fini", "Tapu Fini" },
-            { "Mr-rime", "Mr. Rime" },
-            { "Farfetchd", "Farfetch'd" },
-            { "Sirfetchd", "Sirfetch'd" },
-            /*{ "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },
-            { "Mr-mime", "Mr. Mime" },*/
-        };
-
-        //Transfor pokemon names into user-readable format
-        private string? GetPokemonName()
-        {
-            string? returnName = string.Empty;
-            
-            if (name != null)
-            {
-                returnName = string.Concat(name[0].ToString().ToUpper(), name.AsSpan(1));
-            }
-
-            if (CorrectNameMapping.TryGetValue(returnName, out string? value))
-            {
-                returnName = value;
-            }
-
-            return returnName;
-        }
     }
 
     public class PokémonList

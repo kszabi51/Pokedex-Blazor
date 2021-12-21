@@ -7,7 +7,7 @@
     {
         @foreach (var pokemon in PokemonList.results)
         {
-            <MudItem xs="3">
+            <MudItem xs="6" sm="6" md="4" lg="3" xl="2">
                 <MudCard>
                     <MudCardHeader>
                         <CardHeaderContent>
@@ -15,12 +15,13 @@
                             <MudText Typo="Typo.h5">@pokemon.RealName</MudText>
                         </CardHeaderContent>
                         <CardHeaderActions>
-                            <MudAvatar Image="_content/MudBlazor.Docs/images/mony.png" />
-                            <MudAvatar Image="_content/MudBlazor.Docs/images/mony.png" />
+                            @*<MudAvatar Image="_content/MudBlazor.Docs/images/mony.png" />
+                            <MudAvatar Image="_content/MudBlazor.Docs/images/mony.png" />*@
                         </CardHeaderActions>
                     </MudCardHeader>
                     <MudCardContent>
-                        <MudCardMedia Image="@pokemon.Picture" Height="200"/>
+                        <img src="@pokemon.Picture" Height="200" style="object-fit:contain"/>
+                        @*<MudCardMedia Image="@pokemon.Picture" Height="200"/>*@
                     </MudCardContent>
                 </MudCard>
             </MudItem>

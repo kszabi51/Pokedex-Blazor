@@ -1,3 +1,48 @@
 ﻿@page "/Details"
 
-<h3>@PokemonDetails?.base_experience</h3>
+<MudGrid>
+    <MudItem xs="6">
+        <MudCard>
+            <MudCardContent>
+                <MudCardMedia />
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="6">
+        <MudGrid>
+            <MudItem xs="12">
+                <MudText Typo="Typo.h3" Align="Align.Center">@PokemonDetails?.RealName</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Typo="Typo.body1" Align="Align.Right">ID</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.id</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Typo="Typo.body1" Align="Align.Right">Height</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.RealHeight</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Typo="Typo.body1" Align="Align.Right">Weight</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.RealWeight</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Typo="Typo.body1" Align="Align.Right">Abilities</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.name</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Typo="Typo.body1" Align="Align.Right">Type</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.weight</MudText>
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+</MudGrid>

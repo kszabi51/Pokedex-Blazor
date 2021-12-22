@@ -15,7 +15,7 @@ namespace Pokédex.Pages
         {
             if (HttpClient != null)
             {
-                PokemonDetails = await HttpClient.GetFromJsonAsync<PokemonDetails>("https://pokeapi.co/api/v2/pokemon/3");
+                PokemonDetails = await HttpClient.GetFromJsonAsync<PokemonDetails>("https://pokeapi.co/api/v2/pokemon/1");
             }
         }
 

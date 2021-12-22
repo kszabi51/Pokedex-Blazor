@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Pokedex.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -397,6 +398,7 @@ namespace Pokédex.Model
 
     public class PokemonDetails
     {
+        //API
         public List<Ability>? abilities { get; set; }
         public int base_experience { get; set; }
         public List<Form>? forms { get; set; }
@@ -415,6 +417,13 @@ namespace Pokédex.Model
         public List<Stat>? stats { get; set; }
         public List<Type>? types { get; set; }
         public int weight { get; set; }
+
+        //UI
+        public string? RealName => PokemonNameService.GetPokemonName(name);
+
+        public string? RealWeight => PokemonWeightService.GetPokemonWeight(weight);
+
+        public string? RealHeight => PokemonHeightService.GetPokemonHeight(height);
     }
 
 

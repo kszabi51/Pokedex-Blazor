@@ -12,7 +12,7 @@ namespace Pokédex.Pages
         public PokemonDetails? PokemonDetails { get; set; }
 
         [Parameter]
-        public string PokemonId { get; set; }
+        public string? PokemonId { get; set; }
 
         protected async override Task OnInitializedAsync()
         {

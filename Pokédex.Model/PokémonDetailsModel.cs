@@ -424,6 +424,8 @@ namespace Pokedex.Model
         public string? RealWeight => PokemonWeightService.GetPokemonWeight(weight);
 
         public string? RealHeight => PokemonHeightService.GetPokemonHeight(height);
+
+        public string? Picture => PokemonPictureService.GetPictureUrl(id.ToString());
     }
 
 

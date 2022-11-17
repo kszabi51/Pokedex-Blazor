@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pokédex.Model
+namespace Pokedex.Model
 {
     public class Ability2
     {

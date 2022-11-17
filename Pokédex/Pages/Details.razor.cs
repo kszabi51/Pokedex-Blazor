@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Pokédex.Model;
+using Pokedex.Model;
 using System.Net.Http.Json;
 
 namespace Pokédex.Pages

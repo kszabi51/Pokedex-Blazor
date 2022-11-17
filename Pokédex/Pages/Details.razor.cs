@@ -11,11 +11,15 @@ namespace Pokédex.Pages
 
         public PokemonDetails? PokemonDetails { get; set; }
 
+        [Parameter]
+        public string PokemonId { get; set; }
+
         protected async override Task OnInitializedAsync()
         {
             if (HttpClient != null)
             {
-                PokemonDetails = await HttpClient.GetFromJsonAsync<PokemonDetails>("https://pokeapi.co/api/v2/pokemon/1");
+                string url = $"https://pokeapi.co/api/v2/pokemon/{PokemonId}";
+                PokemonDetails = await HttpClient.GetFromJsonAsync<PokemonDetails>(url);
             }
         }
 

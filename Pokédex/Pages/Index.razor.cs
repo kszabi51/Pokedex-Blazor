@@ -22,12 +22,10 @@ namespace Pokédex.Pages
             }
         }
 
-        public void PokemonSelected()
-        {
-            if (NavigationManager != null)
-            {
-                NavigationManager.NavigateTo("Details/2");
-            }
-        }
+        /// <summary>
+        /// Navigates to the details page of the selected Pokemon
+        /// </summary>
+        /// <param name="pokemonId">The id of the selected Pokemon</param>
+        public void PokemonSelected(int pokemonId = 1) => NavigationManager?.NavigateTo($"Details/{pokemonId}");
     }
 }

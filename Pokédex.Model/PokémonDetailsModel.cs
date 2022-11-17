@@ -390,10 +390,10 @@ namespace Pokédex.Model
         public string? url { get; set; }
     }
 
-    public class Type
+    public class Type_
     {
         public int slot { get; set; }
-        public Type? type { get; set; }
+        public Type2? type { get; set; }
     }
 
     public class PokemonDetails
@@ -415,7 +415,7 @@ namespace Pokédex.Model
         public Species? species { get; set; }
         public Sprites? sprites { get; set; }
         public List<Stat>? stats { get; set; }
-        public List<Type>? types { get; set; }
+        public List<Type_>? types { get; set; }
         public int weight { get; set; }
 
         //UI

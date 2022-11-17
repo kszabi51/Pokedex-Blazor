@@ -3,7 +3,7 @@
 <PageTitle>Index</PageTitle>
 
 <MudGrid>
-    @if (PokemonList?.results != null @*&& PokemonListDataModel != null*@)
+    @if (PokemonList?.results != null)
     {
         @foreach (var pokemon in PokemonList.results)
         {
@@ -14,14 +14,9 @@
                             <MudText Typo="Typo.h4">@pokemon.Number</MudText>
                             <MudText Typo="Typo.h5">@pokemon.RealName</MudText>
                         </CardHeaderContent>
-                        <CardHeaderActions>
-                            @*<MudAvatar Image="_content/MudBlazor.Docs/images/mony.png" />
-                            <MudAvatar Image="_content/MudBlazor.Docs/images/mony.png" />*@
-                        </CardHeaderActions>
                     </MudCardHeader>
                     <MudCardContent>
                         <img id="pokemonPicture" src="@pokemon.Picture" Height="200"/>
-                        @*<MudCardMedia id="pokemonPicture" Image="@pokemon.Picture" Height="200" Style="object-fit: contain"/>*@
                     </MudCardContent>
                 </MudCard>
             </MudItem>

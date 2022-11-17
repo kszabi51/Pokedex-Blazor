@@ -5,9 +5,9 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokédex", "Pokédex\Pokédex.csproj", "{B0F96069-69C7-441F-84D7-D9437C1EB1E4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokédex.Model", "Pokédex.Model\Pokédex.Model.csproj", "{17E49DB4-C69A-4EA9-8FAD-35E5F8A08405}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.Model", "Pokédex.Model\Pokedex.Model.csproj", "{17E49DB4-C69A-4EA9-8FAD-35E5F8A08405}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokedex.Services", "Pokedex.Services\Pokedex.Services.csproj", "{69C81BBA-0548-4745-94D0-7822D0E3F4BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.Services", "Pokedex.Services\Pokedex.Services.csproj", "{69C81BBA-0548-4745-94D0-7822D0E3F4BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

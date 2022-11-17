@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Pokédex.Model\Pokédex.Model.csproj" />
+    <ProjectReference Include="..\Pokédex.Model\Pokedex.Model.csproj" />
   </ItemGroup>
 
 </Project>

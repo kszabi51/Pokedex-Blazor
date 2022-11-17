@@ -9,6 +9,9 @@ namespace Pokédex.Pages
         [Inject]
         public HttpClient? HttpClient { get; set; }
 
+        [Inject]
+        public NavigationManager? NavigationManager { get; set; }
+
         public PokémonList? PokemonList { get; set; }
 
         protected async override Task OnInitializedAsync()
@@ -16,6 +19,14 @@ namespace Pokédex.Pages
             if (HttpClient != null)
             {
                 PokemonList = await HttpClient.GetFromJsonAsync<PokémonList>("https://pokeapi.co/api/v2/pokemon?limit=1200");
+            }
+        }
+
+        public void PokemonSelected()
+        {
+            if (NavigationManager != null)
+            {
+                NavigationManager.NavigateTo("Details/2");
             }
         }
     }

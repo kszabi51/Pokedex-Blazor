@@ -27,7 +27,7 @@ namespace Pokedex.Services
             { "Sirfetchd", "Sirfetch'd" },
         };
 
-        //Transfor pokemon names into user-readable format
+        //Transform pokemon names into user-readable format
         public static string? GetPokemonName(string? name)
         {
             string? returnName = string.Empty;

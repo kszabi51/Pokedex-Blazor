@@ -7,7 +7,7 @@
     {
         @foreach (var pokemon in PokemonList.results)
         {
-            <MudItem xs="6" sm="6" md="4" lg="3" xl="2">
+            <MudItem xs="6" sm="6" md="4" lg="3" xl="2" @onclick="PokemonSelected">
                 <MudCard>
                     <MudCardHeader>
                         <CardHeaderContent>

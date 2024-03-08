@@ -18,7 +18,7 @@ namespace Pokédex.Pages
         {
             if (HttpClient != null)
             {
-                PokemonList = await HttpClient.GetFromJsonAsync<PokémonList>("https://pokeapi.co/api/v2/pokemon?limit=1200");
+                PokemonList = await HttpClient.GetFromJsonAsync<PokémonList>("https://pokeapi.co/api/v2/pokemon?limit=1025");
             }
         }
 

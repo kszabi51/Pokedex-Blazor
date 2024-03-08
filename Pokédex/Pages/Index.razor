@@ -12,14 +12,20 @@
                     <MudCardHeader>
                         <CardHeaderContent>
                             <MudText Typo="Typo.h4">@pokemon.Number</MudText>
-                            <MudText Typo="Typo.h5">@pokemon.RealName</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent>
-                        <img id="pokemonPicture" src="@pokemon.Picture" Height="200"/>
-                    </MudCardContent>
-                </MudCard>
-            </MudItem>
+                                <MudText Typo="Typo.h5">@pokemon.RealName</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <img id="pokemonPicture" src="@pokemon.Picture" height="200" alt="@pokemon.RealName" />
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
         }
+    }
+    else
+    {
+        <MudItem xs="12">
+            <MudAlert Severity="Severity.Info">Loading...</MudAlert>
+        </MudItem>
     }
 </MudGrid>

@@ -33,7 +33,13 @@
                 <MudText Typo="Typo.body1" Align="Align.Right">Abilities</MudText>
             </MudItem>
             <MudItem xs="6">
-                <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.name</MudText>
+                @if (PokemonDetails != null && PokemonDetails.abilities != null)
+                {
+                    @foreach (var ability in PokemonDetails.abilities)
+                    {
+                        <MudText Typo="Typo.body1" Align="Align.Left">@ability?.ability?.name</MudText>
+                    }
+                }              
             </MudItem>
             <MudItem xs="6">
                 <MudText Typo="Typo.body1" Align="Align.Right">Type</MudText>

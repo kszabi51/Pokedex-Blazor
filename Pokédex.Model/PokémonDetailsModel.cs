@@ -2,6 +2,7 @@
 using Pokedex.Services;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -381,7 +382,7 @@ namespace Pokedex.Model
     {
         public int base_stat { get; set; }
         public int effort { get; set; }
-        public Stat? stat { get; set; }
+        public Stat2? stat { get; set; }
     }
 
     public class Type2
@@ -426,6 +427,44 @@ namespace Pokedex.Model
         public string? RealHeight => PokemonHeightService.GetPokemonHeight(height);
 
         public string? Picture => PokemonPictureService.GetPictureUrl(id.ToString());
+
+        public double[]? Statistics => ProvidePokemonStats(stats);
+
+        private double[]? ProvidePokemonStats(List<Stat>? stats)
+        {
+            double[] statsArray = new double[6];
+            if (stats == null) { return statsArray; }
+
+            int index = 0;
+            foreach (Stat stat in stats)
+            {
+                statsArray[index] = stat.base_stat;
+                index++;
+            }
+
+            return statsArray;
+        }
+
+        public string[] StatNames => ProvideStatNames(stats);
+
+        private string[] ProvideStatNames(List<Stat>? stats)
+        {
+            string[] statNames = new string[6];
+            if (stats == null) { return statNames; }
+
+            int index = 0;
+            foreach (Stat stat in stats)
+            {
+                if (stat.stat?.name != null)
+                {
+                    statNames[index] = stat.stat.name;
+                }
+
+                index++;
+            }
+
+            return statNames;
+        }
     }
 
 

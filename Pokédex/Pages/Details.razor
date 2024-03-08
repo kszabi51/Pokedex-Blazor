@@ -48,6 +48,16 @@
                 <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.types?.FirstOrDefault()?.type?.name</MudText>
                 <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.types?.FirstOrDefault(t => t.slot == 2)?.type?.name</MudText>
             </MudItem>
+            <MudItem>
+                <MudChart ChartType="ChartType.Donut" LegendPosition="Position.Top" Width="300px" Height="300px"
+                          InputData="@PokemonDetails?.Statistics" InputLabels="@PokemonDetails?.StatNames">
+                        @* <CustomGraphics>
+                            <text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" font-size="2">Total</text>
+                            <text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="5">235</text>
+                        </CustomGraphics> *@
+                </MudChart>
+            </MudItem>
+            
         </MudGrid>
     </MudItem>
 </MudGrid>

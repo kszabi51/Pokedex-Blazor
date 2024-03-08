@@ -10,6 +10,10 @@
         </LayoutView>
     </NotFound>
 </Router>
-<MudThemeProvider/>
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" />
 <MudDialogProvider/>
 <MudSnackbarProvider/>
+
+@code {
+    private bool _isDarkMode = false;
+}

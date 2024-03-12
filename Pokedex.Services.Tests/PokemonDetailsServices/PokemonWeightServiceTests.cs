@@ -1,5 +1,3 @@
-using Pokedex.Services;
-
 namespace Pokedex.Tests
 {
     [TestFixture]

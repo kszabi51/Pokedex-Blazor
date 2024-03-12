@@ -1,6 +1,4 @@
-﻿using Pokedex.Services;
-
-namespace Pokedex.Tests
+﻿namespace Pokedex.Tests
 {
     [TestFixture]
     public class PokemonHeightServiceTests

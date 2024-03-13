@@ -51,8 +51,7 @@
                 <MudItem>
                     @if (PokemonDetails?.Statistics != null && PokemonDetails?.StatNames != null)
                 {
-                    <MudChart ChartType="ChartType.Bar" XAxisLabels="@PokemonDetails?.StatNames" ChartSeries="@Series"
-                              ChartOptions="@chartOptions" LegendPosition="Position.Bottom" Width="100%" />
+                    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series"LegendPosition="Position.Bottom" Width="100%" />
                 }
                 else
                 {

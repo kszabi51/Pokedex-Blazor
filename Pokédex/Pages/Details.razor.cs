@@ -37,11 +37,5 @@ namespace Pokédex.Pages
                 }            
             }
         }
-
-        private ChartOptions chartOptions = new ChartOptions
-        {
-            LineStrokeWidth = 10,
-        };
-
     }
 }

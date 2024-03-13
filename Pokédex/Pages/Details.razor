@@ -51,7 +51,7 @@
                 <MudItem>
                     @if (PokemonDetails?.Statistics != null && PokemonDetails?.StatNames != null)
                 {
-                    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series"LegendPosition="Position.Bottom" Width="100%" />
+                    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" LegendPosition="Position.Bottom" Width="120%" />
                 }
                 else
                 {
@@ -62,3 +62,14 @@
         </MudGrid>
     </MudItem>
 </MudGrid>
+
+<style>
+    .mud-chart-bar {
+        stroke-width: 40px;
+    }
+
+    .mud-charts-bar-series,
+    .mud-charts-xaxis {
+        transform: translateX(20px) scaleX(0.88);
+    }
+</style>

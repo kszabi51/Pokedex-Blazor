@@ -27,12 +27,12 @@ namespace Pokédex.Pages
                 {
                     Series = new List<ChartSeries>
                     {
-                    new ChartSeries(){Name="HP", Data=new double[]{PokemonDetails.Statistics.ElementAt(0) } },
-                    new ChartSeries(){Name="Attack", Data=new double[]{PokemonDetails.Statistics.ElementAt(1) } },
-                    new ChartSeries(){Name="Defense", Data=new double[]{PokemonDetails.Statistics.ElementAt(2) } },
-                    new ChartSeries(){Name="Special Attack", Data=new double[]{PokemonDetails.Statistics.ElementAt(3) } },
-                    new ChartSeries(){Name="Special Defense", Data=new double[]{PokemonDetails.Statistics.ElementAt(4) } },
-                    new ChartSeries(){Name="Speed", Data=new double[]{PokemonDetails.Statistics.ElementAt(5) } },
+                    new ChartSeries(){Name="HP", Data=new double[]{PokemonDetails.Statistics.ElementAt(0), 0, 0, 0, 0, 0 } },
+                    new ChartSeries(){Name="Attack", Data=new double[]{0, PokemonDetails.Statistics.ElementAt(1), 0, 0, 0, 0 } },
+                    new ChartSeries(){Name="Defense", Data=new double[]{0, 0, PokemonDetails.Statistics.ElementAt(2), 0, 0,0 } },
+                    new ChartSeries(){Name="Special Attack", Data=new double[]{0, 0, 0, PokemonDetails.Statistics.ElementAt(3), 0, 0 } },
+                    new ChartSeries(){Name="Special Defense", Data=new double[]{0, 0, 0, 0, PokemonDetails.Statistics.ElementAt(4), 0 } },
+                    new ChartSeries(){Name="Speed", Data=new double[]{ 0, 0, 0, 0, 0, PokemonDetails.Statistics.ElementAt(5) } },
                     };
                 }            
             }

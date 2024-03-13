@@ -10,54 +10,56 @@
         <MudGrid>
             <MudItem xs="12">
                 <MudText Typo="Typo.h3" Align="Align.Center">@PokemonDetails?.RealName</MudText>
-            </MudItem>
-            <MudItem xs="6">
-                <MudText Typo="Typo.body1" Align="Align.Right">ID</MudText>
-            </MudItem>
-            <MudItem xs="6">
-                <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.id</MudText>
-            </MudItem>
-            <MudItem xs="6">
-                <MudText Typo="Typo.body1" Align="Align.Right">Height</MudText>
-            </MudItem>
-            <MudItem xs="6">
-                <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.RealHeight</MudText>
-            </MudItem>
-            <MudItem xs="6">
-                <MudText Typo="Typo.body1" Align="Align.Right">Weight</MudText>
-            </MudItem>
-            <MudItem xs="6">
-                <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.RealWeight</MudText>
-            </MudItem>
-            <MudItem xs="6">
-                <MudText Typo="Typo.body1" Align="Align.Right">Abilities</MudText>
-            </MudItem>
-            <MudItem xs="6">
-                @if (PokemonDetails != null && PokemonDetails.abilities != null)
+                </MudItem>
+                <MudItem xs="6">
+                    <MudText Typo="Typo.body1" Align="Align.Right">ID</MudText>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.id</MudText>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudText Typo="Typo.body1" Align="Align.Right">Height</MudText>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.RealHeight</MudText>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudText Typo="Typo.body1" Align="Align.Right">Weight</MudText>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.RealWeight</MudText>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudText Typo="Typo.body1" Align="Align.Right">Abilities</MudText>
+                </MudItem>
+                <MudItem xs="6">
+                    @if (PokemonDetails != null && PokemonDetails.abilities != null)
                 {
                     @foreach (var ability in PokemonDetails.abilities)
                     {
                         <MudText Typo="Typo.body1" Align="Align.Left">@ability?.ability?.name</MudText>
                     }
-                }              
+                }
             </MudItem>
             <MudItem xs="6">
                 <MudText Typo="Typo.body1" Align="Align.Right">Type</MudText>
             </MudItem>
             <MudItem xs="6">
                 <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.types?.FirstOrDefault()?.type?.name</MudText>
-                <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.types?.FirstOrDefault(t => t.slot == 2)?.type?.name</MudText>
+                    <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.types?.FirstOrDefault(t => t.slot == 2)?.type?.name</MudText>
+                </MudItem>
+                <MudItem>
+                    @if (PokemonDetails?.Statistics != null && PokemonDetails?.StatNames != null)
+                {
+                    <MudChart ChartType="ChartType.Bar" XAxisLabels="@PokemonDetails?.StatNames" ChartSeries="@Series"
+                              ChartOptions="@chartOptions" LegendPosition="Position.Bottom" Width="100%" />
+                }
+                else
+                {
+                    <p>Loading chart data...</p>
+                }
             </MudItem>
-            <MudItem>
-                <MudChart ChartType="ChartType.Donut" LegendPosition="Position.Top" Width="300px" Height="300px"
-                          InputData="@PokemonDetails?.Statistics" InputLabels="@PokemonDetails?.StatNames">
-                        @* <CustomGraphics>
-                            <text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" font-size="2">Total</text>
-                            <text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="5">235</text>
-                        </CustomGraphics> *@
-                </MudChart>
-            </MudItem>
-            
+
         </MudGrid>
     </MudItem>
 </MudGrid>

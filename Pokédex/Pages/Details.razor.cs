@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using Pokedex.Model;
 using System.Net.Http.Json;
 
@@ -11,6 +12,8 @@ namespace Pokédex.Pages
 
         public PokemonDetails? PokemonDetails { get; set; }
 
+        public List<ChartSeries> Series = new List<ChartSeries>();
+
         [Parameter]
         public string? PokemonId { get; set; }
 
@@ -20,8 +23,25 @@ namespace Pokédex.Pages
             {
                 string url = $"https://pokeapi.co/api/v2/pokemon/{PokemonId}";
                 PokemonDetails = await HttpClient.GetFromJsonAsync<PokemonDetails>(url);
+                if (PokemonDetails?.Statistics != null && PokemonDetails.Statistics.Length>5)
+                {
+                    Series = new List<ChartSeries>
+                    {
+                    new ChartSeries(){Name="HP", Data=new double[]{PokemonDetails.Statistics.ElementAt(0) } },
+                    new ChartSeries(){Name="Attack", Data=new double[]{PokemonDetails.Statistics.ElementAt(1) } },
+                    new ChartSeries(){Name="Defense", Data=new double[]{PokemonDetails.Statistics.ElementAt(2) } },
+                    new ChartSeries(){Name="Special Attack", Data=new double[]{PokemonDetails.Statistics.ElementAt(3) } },
+                    new ChartSeries(){Name="Special Defense", Data=new double[]{PokemonDetails.Statistics.ElementAt(4) } },
+                    new ChartSeries(){Name="Speed", Data=new double[]{PokemonDetails.Statistics.ElementAt(5) } },
+                    };
+                }            
             }
         }
+
+        private ChartOptions chartOptions = new ChartOptions
+        {
+            LineStrokeWidth = 10,
+        };
 
     }
 }

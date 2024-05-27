@@ -14,6 +14,8 @@ namespace Pokédex.Pages
 
         public PokémonList? PokemonList { get; set; }
 
+        public string? SearchString { get; set; }
+
         protected async override Task OnInitializedAsync()
         {
             if (HttpClient != null)

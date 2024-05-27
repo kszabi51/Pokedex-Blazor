@@ -2,10 +2,14 @@
 
 <PageTitle>Index</PageTitle>
 
+<MudTextField Label="Search" @bind-Value="SearchString" Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Class="my-3" />
+
 <MudGrid>
     @if (PokemonList?.results != null)
     {
-        @foreach (var pokemon in PokemonList.results)
+        var filteredList = string.IsNullOrWhiteSpace(SearchString) ? PokemonList.results : PokemonList.results.Where(p => p.RealName.Contains(SearchString, StringComparison.OrdinalIgnoreCase));
+
+        @foreach (var pokemon in filteredList)
         {
             <MudItem xs="6" sm="6" md="4" lg="3" xl="2" @onclick="() => PokemonSelected(pokemon.Number)">
                 <MudCard>

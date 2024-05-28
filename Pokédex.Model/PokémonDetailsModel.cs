@@ -428,6 +428,27 @@ namespace Pokedex.Model
 
         public string? Picture => PokemonPictureService.GetPictureUrl(id.ToString());
 
+        public List<string> TypeNames
+        {
+            get
+            {
+                List<string> typenames = new List<string>();
+                if (types != null)
+                {
+                    foreach (var type in types)
+                    {
+                        if (type != null && type.type != null && type.type.name != null)
+                        {
+                            typenames.Add(type.type.name);
+                        }                
+                    }
+                }
+                return typenames;
+            }
+        }
+
+        public List<string>? TypeIcons => PokemonTypeIconService.GetIcons(TypeNames);
+
         public double[]? Statistics => ProvidePokemonStats(stats);
 
         private double[]? ProvidePokemonStats(List<Stat>? stats)

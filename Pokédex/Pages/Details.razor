@@ -2,14 +2,12 @@
 
 <MudGrid>
     <MudItem xs="6">
-
         <img id="pokemonPicture" src="@PokemonDetails?.Picture" />
-
     </MudItem>
     <MudItem xs="6">
         <MudGrid>
-            <MudItem xs="12">
-                <MudText Typo="Typo.h3" Align="Align.Center">@PokemonDetails?.RealName</MudText>
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h3" Align="Align.Center">@PokemonDetails?.RealName</MudText>
                 </MudItem>
                 <MudItem xs="6">
                     <MudText Typo="Typo.body1" Align="Align.Right">ID</MudText>
@@ -40,13 +38,18 @@
                         <MudText Typo="Typo.body1" Align="Align.Left">@ability?.ability?.name</MudText>
                     }
                 }
-            </MudItem>
-            <MudItem xs="6">
-                <MudText Typo="Typo.body1" Align="Align.Right">Type</MudText>
-            </MudItem>
-            <MudItem xs="6">
-                <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.types?.FirstOrDefault()?.type?.name</MudText>
-                    <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.types?.FirstOrDefault(t => t.slot == 2)?.type?.name</MudText>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudText Typo="Typo.body1" Align="Align.Right">Type(s)</MudText>
+                </MudItem>
+                <MudItem xs="6">
+                <img class="typeIcon" src="@PokemonDetails?.TypeIcons?.FirstOrDefault()" />
+                @if (PokemonDetails?.TypeIcons?.Count == 2)
+                    {
+                        <img class="typeIcon" src="@PokemonDetails?.TypeIcons?.ElementAt(1)" />
+                    }             
+                    @* <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.types?.FirstOrDefault()?.type?.name</MudText>
+                    <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.types?.FirstOrDefault(t => t.slot == 2)?.type?.name</MudText> *@
                 </MudItem>
                 <MudItem>
                     @if (PokemonDetails?.Statistics != null && PokemonDetails?.StatNames != null)
@@ -57,10 +60,9 @@
                 {
                     <p>Loading chart data...</p>
                 }
-            </MudItem>
-
+                </MudItem>
         </MudGrid>
-    </MudItem>
+    </MudItem>  
 </MudGrid>
 
 <style>

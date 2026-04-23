@@ -1,77 +1,53 @@
 ﻿@page "/Details/{PokemonId}"
 
-<MudGrid>
-    <MudItem xs="6">
-        <img id="pokemonPicture" src="@PokemonDetails?.Picture" />
+<MudGrid Class="pa-4">
+
+    @* Left — image only *@
+    <MudItem xs="12" sm="5" Class="d-flex align-center justify-center">
+        <img class="pokemonImage" src="@PokemonDetails?.Picture" alt="@PokemonDetails?.RealName" />
     </MudItem>
-    <MudItem xs="6">
+
+    @* Right — name, types, info, stats *@
+    <MudItem xs="12" sm="7">
         <MudGrid>
-                <MudItem xs="12">
-                    <MudText Typo="Typo.h3" Align="Align.Center">@PokemonDetails?.RealName</MudText>
-                </MudItem>
-                <MudItem xs="6">
-                    <MudText Typo="Typo.body1" Align="Align.Right">ID</MudText>
-                </MudItem>
-                <MudItem xs="6">
-                    <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.id</MudText>
-                </MudItem>
-                <MudItem xs="6">
-                    <MudText Typo="Typo.body1" Align="Align.Right">Height</MudText>
-                </MudItem>
-                <MudItem xs="6">
-                    <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.RealHeight</MudText>
-                </MudItem>
-                <MudItem xs="6">
-                    <MudText Typo="Typo.body1" Align="Align.Right">Weight</MudText>
-                </MudItem>
-                <MudItem xs="6">
-                    <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.RealWeight</MudText>
-                </MudItem>
-                <MudItem xs="6">
-                    <MudText Typo="Typo.body1" Align="Align.Right">Abilities</MudText>
-                </MudItem>
-                <MudItem xs="6">
-                    @if (PokemonDetails != null && PokemonDetails.abilities != null)
-                {
-                    @foreach (var ability in PokemonDetails.abilities)
+
+            <MudItem xs="12" Class="d-flex flex-column align-center">
+                <MudText Typo="Typo.h3" Align="Align.Center">@PokemonDetails?.RealName</MudText>
+                <MudText Typo="Typo.subtitle1" Align="Align.Center" Color="Color.Secondary">#@PokemonDetails?.id</MudText>
+                <div class="d-flex gap-2 mt-1">
+                    @foreach (var icon in PokemonDetails?.TypeIcons ?? [])
                     {
-                        <MudText Typo="Typo.body1" Align="Align.Left">@ability?.ability?.name</MudText>
+                        <img class="typeIcon" src="@icon" />
                     }
-                }
-                </MudItem>
-                <MudItem xs="6">
-                    <MudText Typo="Typo.body1" Align="Align.Right">Type(s)</MudText>
-                </MudItem>
-                <MudItem xs="6">
-                <img class="typeIcon" src="@PokemonDetails?.TypeIcons?.FirstOrDefault()" />
-                @if (PokemonDetails?.TypeIcons?.Count == 2)
-                    {
-                        <img class="typeIcon" src="@PokemonDetails?.TypeIcons?.ElementAt(1)" />
-                    }             
-                    @* <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.types?.FirstOrDefault()?.type?.name</MudText>
-                    <MudText Typo="Typo.body1" Align="Align.Left">@PokemonDetails?.types?.FirstOrDefault(t => t.slot == 2)?.type?.name</MudText> *@
-                </MudItem>
-                <MudItem>
-                    @if (PokemonDetails?.Statistics != null && PokemonDetails?.StatNames != null)
+                </div>
+            </MudItem>
+
+            <MudDivider Class="my-3" />
+
+            <MudItem xs="6"><MudText Typo="Typo.body1" Align="Align.Right"><b>Height</b></MudText></MudItem>
+            <MudItem xs="6"><MudText Typo="Typo.body1">@PokemonDetails?.RealHeight</MudText></MudItem>
+
+            <MudItem xs="6"><MudText Typo="Typo.body1" Align="Align.Right"><b>Weight</b></MudText></MudItem>
+            <MudItem xs="6"><MudText Typo="Typo.body1">@PokemonDetails?.RealWeight</MudText></MudItem>
+
+            <MudItem xs="6"><MudText Typo="Typo.body1" Align="Align.Right"><b>Abilities</b></MudText></MudItem>
+            <MudItem xs="6">
+                @foreach (var ability in PokemonDetails?.abilities ?? [])
                 {
-                    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" LegendPosition="Position.Bottom" Width="120%" />
+                    <MudText Typo="Typo.body1">@ability?.ability?.name</MudText>
                 }
-                else
-                {
-                    <p>Loading chart data...</p>
-                }
-                </MudItem>
+            </MudItem>
+
+            <MudDivider Class="my-3" />
+
+            <MudItem xs="12">
+                <MudText Typo="Typo.h6" Class="mb-2">Base Stats</MudText>
+                <div class="chart-container">
+                    <canvas id="statChart"></canvas>
+                </div>
+            </MudItem>
+
         </MudGrid>
-    </MudItem>  
+    </MudItem>
+
 </MudGrid>
-
-<style>
-    .mud-chart-bar {
-        stroke-width: 40px;
-    }
-
-    .mud-charts-bar-series,
-    .mud-charts-xaxis {
-        transform: translateX(20px) scaleX(0.88);
-    }
-</style>

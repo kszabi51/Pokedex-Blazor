@@ -20,6 +20,12 @@
                         <img class="typeIcon" src="@icon" />
                     }
                 </div>
+                @if (PokemonSpecies?.EnglishEntry != null)
+                {
+                    <MudText Typo="Typo.body1" Align="Align.Center" Class="mt-3 px-2 fst-italic">
+                        @PokemonSpecies.EnglishEntry
+                    </MudText>
+                }
             </MudItem>
 
             <MudDivider Class="my-3" />

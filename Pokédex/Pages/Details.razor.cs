@@ -11,16 +11,12 @@ namespace Pokédex.Pages
         [Inject] public IJSRuntime? JS { get; set; }
 
         public PokemonDetails? PokemonDetails { get; set; }
+        public PokemonSpecies? PokemonSpecies { get; set; }
 
         private static readonly string[] StatLabels = ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed"];
         private static readonly string[] StatColors =
         [
-            "#FF5959", // HP - red
-            "#F5AC78", // Attack - orange
-            "#FAE078", // Defense - yellow
-            "#9DB7F5", // Sp. Atk - blue
-            "#A7DB8D", // Sp. Def - green
-            "#B57BFF"  // Speed - purple
+            "#FF5959", "#F5AC78", "#FAE078", "#9DB7F5", "#A7DB8D", "#B57BFF"
         ];
 
         private bool _chartPending = false;
@@ -33,6 +29,13 @@ namespace Pokédex.Pages
             {
                 PokemonDetails = await HttpClient.GetFromJsonAsync<PokemonDetails>(
                     $"https://pokeapi.co/api/v2/pokemon/{PokemonId}");
+
+                if (PokemonDetails != null)
+                {
+                    PokemonSpecies = await HttpClient.GetFromJsonAsync<PokemonSpecies>(
+                        $"https://pokeapi.co/api/v2/pokemon-species/{PokemonDetails.id}");
+                }
+
                 _chartPending = true;
             }
         }

@@ -1,14 +1,14 @@
 window.typeGraph = {
-    _cy: null,
+    _charts: {},
 
-    init: function (nodes, edges) {
-        const container = document.getElementById('typeGraph');
+    init: function (containerId, nodes, edges) {
+        const container = document.getElementById(containerId);
         if (!container) return;
-        if (this._cy) {
-            this._cy.destroy();
+        if (this._charts[containerId]) {
+            this._charts[containerId].destroy();
         }
 
-        this._cy = cytoscape({
+        this._charts[containerId] = cytoscape({
             container: container,
             elements: {
                 nodes: nodes.map(n => ({
@@ -76,7 +76,7 @@ window.typeGraph = {
                 name: 'concentric',
                 concentric: node => node.data('isCenter') ? 10 : 1,
                 levelWidth: () => 1,
-                minNodeSpacing: 60,
+                minNodeSpacing: 50,
                 animate: true,
                 animationDuration: 400
             }

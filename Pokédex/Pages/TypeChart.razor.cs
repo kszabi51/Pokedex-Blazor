@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Components;
+ï»¿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Pokedex.Services;
 
-namespace Pokédex.Pages
+namespace PokÃ©dex.Pages
 {
     public partial class TypeChart
     {
@@ -23,99 +23,78 @@ namespace Pokédex.Pages
             { "Steel",    "#B8B8D0" }, { "Fairy",    "#EE99AC" }
         };
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender && JS != null)
-            {
-                var nodes = TypeEffectivenessService.Types.Select(t => new
-                {
-                    id = t,
-                    label = t,
-                    color = TypeColors.TryGetValue(t, out var c) ? c : "#888"
-                }).ToArray();
-
-                var edges = new List<object>();
-                int edgeId = 0;
-                foreach (var atk in TypeEffectivenessService.Types)
-                {
-                    foreach (var def in TypeEffectivenessService.Types)
-                    {
-                        var eff = TypeEffectivenessService.GetEffectiveness(atk, def);
-                        if (eff == 1.0) continue;
-
-                        edges.Add(new
-                        {
-                            id = $"e{edgeId++}",
-                            source = atk,
-                            target = def,
-                            edgeColor = eff == 2.0 ? "#4CAF50" : eff == 0.0 ? "#333" : "#F44336",
-                            label = eff == 2.0 ? "2×" : eff == 0.0 ? "0" : "½"
-                        });
-                    }
-                }
-
-                await JS.InvokeVoidAsync("typeGraph.init", nodes, edges.ToArray());
-            }
-        }
-
         private async Task OnTypeSelected(string type)
         {
             SelectedType = type;
             StateHasChanged();
-            await Task.Yield(); // let Blazor render the canvas div first
+            await Task.Yield();
 
-            var connectedTypeIds = TypeEffectivenessService.Types
-                .Where(t => TypeEffectivenessService.GetEffectiveness(type, t) != 1.0
-                         || TypeEffectivenessService.GetEffectiveness(t, type) != 1.0)
-                .ToHashSet();
+            if (JS == null) return;
 
-            connectedTypeIds.Add(type);
-
-            var nodes = connectedTypeIds.Select(t => new
+            var centerNode = new[]
             {
-                id = t,
-                label = t,
-                color = TypeColors.TryGetValue(t, out var c) ? c : "#888",
-                isCenter = t == type
-            }).ToArray();
+                new { id = type, label = type, color = TypeColors.GetValueOrDefault(type, "#888"), isCenter = true }
+            };
 
-            var edges = new List<object>();
+            // --- Attack graph (selected type â†’ others) ---
+            var attackEdges = new List<object>();
+            var attackNodeIds = new HashSet<string> { type };
             int edgeId = 0;
 
-            // Outgoing: selected type attacks others
             foreach (var def in TypeEffectivenessService.Types)
             {
                 var eff = TypeEffectivenessService.GetEffectiveness(type, def);
                 if (eff == 1.0 || def == type) continue;
-
-                edges.Add(new
+                attackNodeIds.Add(def);
+                attackEdges.Add(new
                 {
-                    id = $"e{edgeId++}",
+                    id = $"a{edgeId++}",
                     source = type,
                     target = def,
                     edgeColor = eff == 2.0 ? "#4CAF50" : eff == 0.0 ? "#333" : "#F44336",
-                    label = eff == 2.0 ? "2×" : eff == 0.0 ? "0" : "½"
+                    label = eff == 2.0 ? "2Ã—" : eff == 0.0 ? "0" : "Â½"
                 });
             }
 
-            // Incoming: other types attacking the selected type
+            var attackNodes = attackNodeIds.Select(t => new
+            {
+                id = t,
+                label = t,
+                color = TypeColors.GetValueOrDefault(t, "#888"),
+                isCenter = t == type
+            }).ToArray();
+
+            await JS.InvokeVoidAsync("typeGraph.init", "typeGraphAttack", attackNodes, attackEdges.ToArray());
+
+            // --- Defense graph (others â†’ selected type) ---
+            var defenseEdges = new List<object>();
+            var defenseNodeIds = new HashSet<string> { type };
+            edgeId = 0;
+
             foreach (var atk in TypeEffectivenessService.Types)
             {
                 var eff = TypeEffectivenessService.GetEffectiveness(atk, type);
                 if (eff == 1.0 || atk == type) continue;
-
-                edges.Add(new
+                defenseNodeIds.Add(atk);
+                defenseEdges.Add(new
                 {
-                    id = $"e{edgeId++}",
+                    id = $"d{edgeId++}",
                     source = atk,
                     target = type,
                     edgeColor = eff == 2.0 ? "#4CAF50" : eff == 0.0 ? "#333" : "#F44336",
-                    label = eff == 2.0 ? "2×" : eff == 0.0 ? "0" : "½"
+                    label = eff == 2.0 ? "2Ã—" : eff == 0.0 ? "0" : "Â½"
                 });
             }
 
-            if (JS != null)
-                await JS.InvokeVoidAsync("typeGraph.init", nodes, edges.ToArray());
+            var defenseNodes = defenseNodeIds.Select(t => new
+            {
+                id = t,
+                label = t,
+                color = TypeColors.GetValueOrDefault(t, "#888"),
+                isCenter = t == type
+            }).ToArray();
+
+            await JS.InvokeVoidAsync("typeGraph.init", "typeGraphDefense", defenseNodes, defenseEdges.ToArray());
         }
     }
 }

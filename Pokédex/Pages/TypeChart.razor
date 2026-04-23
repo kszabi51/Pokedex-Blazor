@@ -1,4 +1,4 @@
-@page "/TypeChart"
+﻿@page "/TypeChart"
 
 <PageTitle>Type Chart</PageTitle>
 
@@ -21,39 +21,43 @@
 {
     <MudGrid>
         <MudItem xs="12" sm="6">
-            <MudText Typo="Typo.h6" Class="mb-2">
-                <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Color="Color.Success" Size="Size.Small" />
-                @SelectedType is strong against
-            </MudText>
+            <MudText Typo="Typo.h6" Class="mb-2">⚔️ Attacking as @SelectedType</MudText>
             <div class="d-flex gap-3 mb-2 flex-wrap">
                 <div class="d-flex align-center gap-2">
                     <div class="legend-box" style="background:#4CAF50;"></div>
-                    <MudText Typo="Typo.caption">2� damage</MudText>
+                    <MudText Typo="Typo.caption">2× damage</MudText>
                 </div>
                 <div class="d-flex align-center gap-2">
                     <div class="legend-box" style="background:#F44336;"></div>
-                    <MudText Typo="Typo.caption">�� damage</MudText>
+                    <MudText Typo="Typo.caption">½× damage</MudText>
                 </div>
                 <div class="d-flex align-center gap-2">
                     <div class="legend-box" style="background:#333;"></div>
                     <MudText Typo="Typo.caption">No effect</MudText>
                 </div>
             </div>
+            @{
+                var selfEff = TypeEffectivenessService.GetEffectiveness(SelectedType, SelectedType);
+            }
+            @if (selfEff != 1.0)
+            {
+                <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">
+                    ⚠️ @SelectedType is also @(selfEff == 2.0 ? "super effective (2×)" : selfEff == 0.0 ? "immune (0×)" : "not very effective (½×)") against itself
+                </MudText>
+            }
             <div id="typeGraphAttack" class="graph-container"></div>
+            @* This script initialization is now at the bottom of the file *@
         </MudItem>
         <MudItem xs="12" sm="6">
-            <MudText Typo="Typo.h6" Class="mb-2">
-                <MudIcon Icon="@Icons.Material.Filled.ArrowBack" Color="Color.Error" Size="Size.Small" />
-                Strong against @SelectedType
-            </MudText>
+            <MudText Typo="Typo.h6" Class="mb-2">🛡️ Defending against @SelectedType</MudText>
             <div class="d-flex gap-3 mb-2 flex-wrap">
                 <div class="d-flex align-center gap-2">
                     <div class="legend-box" style="background:#4CAF50;"></div>
-                    <MudText Typo="Typo.caption">2� damage</MudText>
+                    <MudText Typo="Typo.caption">2× damage</MudText>
                 </div>
                 <div class="d-flex align-center gap-2">
                     <div class="legend-box" style="background:#F44336;"></div>
-                    <MudText Typo="Typo.caption">�� damage</MudText>
+                    <MudText Typo="Typo.caption">½× damage</MudText>
                 </div>
                 <div class="d-flex align-center gap-2">
                     <div class="legend-box" style="background:#333;"></div>

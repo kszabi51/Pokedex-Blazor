@@ -41,6 +41,7 @@ namespace Pokédex.Pages
             var attackNodeIds = new HashSet<string> { type };
             int edgeId = 0;
 
+            // Attack edges
             foreach (var def in TypeEffectivenessService.Types)
             {
                 var eff = TypeEffectivenessService.GetEffectiveness(type, def);
@@ -71,6 +72,7 @@ namespace Pokédex.Pages
             var defenseNodeIds = new HashSet<string> { type };
             edgeId = 0;
 
+            // Defense edges
             foreach (var atk in TypeEffectivenessService.Types)
             {
                 var eff = TypeEffectivenessService.GetEffectiveness(atk, type);

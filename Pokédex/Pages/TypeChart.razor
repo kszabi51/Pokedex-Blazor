@@ -1,0 +1,42 @@
+@page "/TypeChart"
+
+<PageTitle>Type Chart</PageTitle>
+
+<MudText Typo="Typo.h4" Class="mb-3">Type Effectiveness</MudText>
+
+<MudSelect T="string"
+           Label="Select a type"
+           Value="@SelectedType"
+           ValueChanged="OnTypeSelected"
+           Variant="Variant.Outlined"
+           Class="mb-4"
+           Style="max-width:260px;">
+    @foreach (var type in TypeEffectivenessService.Types)
+    {
+        <MudSelectItem Value="@type">@type</MudSelectItem>
+    }
+</MudSelect>
+
+@if (SelectedType != null)
+{
+    <div class="d-flex gap-3 mb-3 flex-wrap">
+        <div class="d-flex align-center gap-2">
+            <div class="legend-box" style="background:#4CAF50;"></div>
+            <MudText Typo="Typo.body2">Super effective (2×)</MudText>
+        </div>
+        <div class="d-flex align-center gap-2">
+            <div class="legend-box" style="background:#F44336;"></div>
+            <MudText Typo="Typo.body2">Not very effective (½)</MudText>
+        </div>
+        <div class="d-flex align-center gap-2">
+            <div class="legend-box" style="background:#333;"></div>
+            <MudText Typo="Typo.body2">No effect (0×)</MudText>
+        </div>
+    </div>
+
+    <div id="typeGraph" class="graph-container"></div>
+}
+else
+{
+    <MudText Typo="Typo.body1" Color="Color.Secondary">Select a type above to view its relationships.</MudText>
+}

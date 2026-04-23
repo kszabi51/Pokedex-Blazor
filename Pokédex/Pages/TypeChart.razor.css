@@ -1,0 +1,66 @@
+.chart-scroll {
+    overflow-x: auto;
+}
+
+.type-table {
+    border-collapse: collapse;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.corner-cell {
+    min-width: 90px;
+    font-weight: bold;
+    padding: 4px 8px;
+}
+
+.header-cell {
+    height: 90px;
+    width: 36px;
+    vertical-align: bottom;
+    padding-bottom: 4px;
+    text-align: center;
+}
+
+.rotated-label {
+    display: block;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.row-label {
+    font-weight: bold;
+    padding: 4px 8px;
+    text-align: right;
+}
+
+.eff-cell {
+    width: 34px;
+    height: 34px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid rgba(0,0,0,0.08);
+}
+
+.cell-text {
+    font-weight: bold;
+    font-size: 11px;
+    color: white;
+}
+
+.graph-container {
+    width: 100%;
+    height: 580px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.legend-box {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}

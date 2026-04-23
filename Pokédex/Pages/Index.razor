@@ -2,12 +2,25 @@
 
 <PageTitle>Index</PageTitle>
 
-<MudTextField Label="Search" @bind-Value="SearchString" Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Class="my-3" />
+<MudTextField @bind-Value="SearchString"
+              Label="Search Pokémon"
+              Placeholder="Name or number..."
+              Variant="Variant.Outlined"
+              Adornment="Adornment.Start"
+              AdornmentIcon="@Icons.Material.Filled.Search"
+              Clearable="true"
+              Immediate="true"
+              DebounceInterval="300"
+              Class="my-3" />
 
 <MudGrid>
     @if (PokemonList?.results != null)
     {
-        var filteredList = string.IsNullOrWhiteSpace(SearchString) ? PokemonList.results : PokemonList.results.Where(p => p.RealName.Contains(SearchString, StringComparison.OrdinalIgnoreCase));
+        var filteredList = string.IsNullOrWhiteSpace(SearchString)
+            ? PokemonList.results
+            : PokemonList.results.Where(p =>
+                p.RealName.Contains(SearchString, StringComparison.OrdinalIgnoreCase) ||
+                p.Number.ToString().Contains(SearchString));
 
         @foreach (var pokemon in filteredList)
         {

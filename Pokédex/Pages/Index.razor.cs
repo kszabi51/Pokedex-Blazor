@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Logging;
 using Pokedex.Model;
 using System.Net.Http.Json;
 
@@ -12,15 +13,30 @@ namespace Pokédex.Pages
         [Inject]
         public NavigationManager? NavigationManager { get; set; }
 
+        [Inject]
+        public ILogger<Index>? Logger { get; set; }
+
         public PokémonList? PokemonList { get; set; }
 
         public string? SearchString { get; set; }
 
+        public bool LoadFailed { get; private set; }
+
         protected async override Task OnInitializedAsync()
         {
-            if (HttpClient != null)
+            if (HttpClient == null)
+            {
+                return;
+            }
+
+            try
             {
                 PokemonList = await HttpClient.GetFromJsonAsync<PokémonList>("https://pokeapi.co/api/v2/pokemon?limit=1025");
+            }
+            catch (Exception ex)
+            {
+                LoadFailed = true;
+                Logger?.LogError(ex, "Failed to load Pokémon list from the API.");
             }
         }
 

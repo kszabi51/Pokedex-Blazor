@@ -2,9 +2,9 @@
 {
     public static class PokemonPictureService
     {
-        private static readonly string baseUrl = $"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
-        private static readonly string fileExtension = ".png";
+        private const string BaseUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
+        private const string FileExtension = ".png";
 
-        public static string? GetPictureUrl(string? pokemonId) => string.Concat(baseUrl, pokemonId, fileExtension);
+        public static string GetPictureUrl(string? pokemonId) => string.Concat(BaseUrl, pokemonId, FileExtension);
     }
 }

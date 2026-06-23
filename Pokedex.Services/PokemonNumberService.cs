@@ -11,12 +11,10 @@
             if (url != null)
             {
                 var urlSegments = url.Split('/');
-                if (urlSegments.Length > PokemonNumberPositionInUrl)
+                if (urlSegments.Length > PokemonNumberPositionInUrl &&
+                    int.TryParse(urlSegments[PokemonNumberPositionInUrl], out int pokemonNumber))
                 {
-                    if (int.TryParse(urlSegments[PokemonNumberPositionInUrl], out int pokemonNumber))
-                    {
-                        return pokemonNumber;
-                    }
+                    return pokemonNumber;
                 }
             }
 

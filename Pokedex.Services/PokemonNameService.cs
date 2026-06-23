@@ -3,7 +3,7 @@
     public static class PokemonNameService
     {
         //Map API pokemon names to Correct pokemon names
-        private static readonly Dictionary<string, string> CorrectNameMapping = new Dictionary<string, string>()
+        private static readonly Dictionary<string, string> CorrectNameMapping = new()
         {
             { "Nidoran-f", "Nidoran♀" },
             { "Nidoran-m", "Nidoran♂" },
@@ -24,13 +24,14 @@
         //Transform pokemon names into user-readable format
         public static string? GetPokemonName(string? name)
         {
-            string? returnName = string.Empty;
+            //Name must not be null or empty to transform
+            if (string.IsNullOrEmpty(name))
+            {
+                return name;
+            }
 
             //Name must start with Uppercase
-            if (name != null)
-            {
-                returnName = string.Concat(name[0].ToString().ToUpper(), name.AsSpan(1));
-            }
+            var returnName = string.Concat(char.ToUpperInvariant(name[0]).ToString(), name.AsSpan(1));
 
             //Handle special cases
             if (CorrectNameMapping.TryGetValue(returnName, out string? value))

@@ -2,7 +2,7 @@ namespace Pokedex.Services
 {
     public static class TypeEffectivenessService
     {
-        public static readonly string[] Types = new[]
+        public static readonly string[] Types =
         {
             "Normal", "Fire", "Water", "Electric", "Grass", "Ice",
             "Fighting", "Poison", "Ground", "Flying", "Psychic", "Bug",
@@ -80,21 +80,5 @@ namespace Pokedex.Services
 
         public static double GetEffectiveness(string attacking, string defending) =>
             _chart.TryGetValue((attacking, defending), out var val) ? val : 1.0;
-
-        public static string GetCellColor(double effectiveness) => effectiveness switch
-        {
-            2.0 => "#4CAF50",
-            0.5 => "#F44336",
-            0.0 => "#212121",
-            _   => "transparent"
-        };
-
-        public static string GetCellText(double effectiveness) => effectiveness switch
-        {
-            2.0 => "2×",
-            0.5 => "½",
-            0.0 => "0",
-            _   => ""
-        };
     }
 }
